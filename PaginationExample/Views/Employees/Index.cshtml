@@ -41,7 +41,7 @@
 
 @*Pagination Control for navigation to next page, previous pag, etc*@
 @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { pageNo = page }),
-    new X.PagedList.Web.Common.PagedListRenderOptions
+    new PagedListRenderOptions
     {
         DisplayItemSliceAndTotal = true,
         ContainerDivClasses = new[] { "navigation" },
