@@ -1,6 +1,9 @@
+global using PaginationExample.Utilities;
+
 using Microsoft.EntityFrameworkCore;
 using PaginationExample.Data;
-using PaginationExample.Services;
+using PaginationExample.Services.Implementations;
+using PaginationExample.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +14,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DataContext>(options => options
     .UseSqlite(builder.Configuration.GetConnectionString("SQLiteConnection")));
 
-builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 

@@ -1,12 +1,12 @@
-﻿@model IPagedList<Employee>
+﻿@model IPagedList<Job>
 
 @{
-    ViewData["Title"] = "Employees";
+    ViewData["Title"] = "Jobs";
 }
 
 <div class="mt-2">
-    <a asp-action="Create" asp-controller="Employees" class="btn btn-primary">+ Employee</a>
-    <a asp-action="SeedDataFromAPI" asp-controller="Employees" class="btn btn-primary mx-1">Seed Data</a>
+    <a asp-action="Create" asp-controller="Jobs" class="btn btn-primary">+ Job</a>
+    <a asp-action="SeedDataFromAPI" asp-controller="Jobs" class="btn btn-primary mx-1">Seed Data</a>
 </div>
 
 <table class="table mt-4">
@@ -22,18 +22,17 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var employee in Model)
+        @foreach (var job in Model)
         {
             <tr>
-                <td>@employee.Id</td>
-                <td>@employee.FirstName @employee.MiddleName @employee.LastName</td>
-                <td>@employee.Address</td>
-                <td>@employee.Contact</td>
-                <td>@employee.Email</td>
-                <td>@employee.DateOfBirth</td>
+                <td>@job.Id</td>
+                <td>@job.Title</td>
+                <td>@job.Type</td>
+                <td>@job.Area</td>
+                <td>@job.Salary</td>
                 <td>
-                    <a class="btn btn-success" asp-action="Edit" asp-controller="Employees" asp-route-id="@employee.Id">Edit</a>
-                    <a class="btn btn-danger delete-btn" data-id="@employee.Id" asp-action="Delete" asp-controller="Employees" asp-route-id="@employee.Id">Delete</a>
+                    <a class="btn btn-success" asp-action="Edit" asp-controller="Jobs" asp-route-id="@job.Id">Edit</a>
+                    <a class="btn btn-danger delete-btn" data-id="@job.Id" asp-action="Delete" asp-controller="Jobs" asp-route-id="@job.Id">Delete</a>
                 </td>
             </tr>
         }

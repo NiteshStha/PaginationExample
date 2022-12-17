@@ -11,12 +11,13 @@ namespace PaginationExample.Data
         }
 
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Job> Jobs { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(builder);
+            base.OnModelCreating(modelBuilder);
 
-            builder.ApplyConfiguration(new EmployeeConfiguration());
+            modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
         }
     }
 }

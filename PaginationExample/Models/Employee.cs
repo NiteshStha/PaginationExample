@@ -1,13 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PaginationExample.Models
 {
-    public class Employee
+    public class Employee : BaseModel
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         public string FirstName { get; set; } = string.Empty;
 

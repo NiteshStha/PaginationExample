@@ -1,27 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PaginationExample.Data;
 using PaginationExample.Models;
-using PaginationExample.Services;
-using X.PagedList;
+using PaginationExample.Services.Interfaces;
 
 namespace PaginationExample.Controllers
 {
     public class EmployeesController : Controller
     {
-        private const int pageSize = 10;
+        private readonly int _pageSize = GlobalVariables.PageSize;
         private const string employeesAPI = "https://639983e316b0fdad773f3fbc.mockapi.io/api/employees";
-        private readonly DataContext _context;
-        private readonly IEmployeeService _service;
+        private readonly IUnitOfWork _uow;
 
-        public EmployeesController(DataContext context, IEmployeeService service)
+        public EmployeesController(IUnitOfWork uow)
         {
-            _context = context;
-            _service = service;
+            _uow = uow;
         }
 
         public async Task<IActionResult> Index(int pageNo = 1)
         {
-            var employees = await _service.GetPagedAsync(pageNo, pageSize);
+            var employees = await _uow.Employees.GetPagedListAsync(pageNo, _pageSize);
 
             return View(employees);
         }
@@ -39,8 +35,8 @@ namespace PaginationExample.Controllers
                     employee.Id = 0;
                 }
 
-                await _context.Employees.AddRangeAsync(employees);
-                await _context.SaveChangesAsync();
+                await _uow.Employees.CreateRangeAsync(employees);
+                await _uow.SaveAsync();
             }
 
             return RedirectToAction("Index", "Employees");
